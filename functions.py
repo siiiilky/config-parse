@@ -50,7 +50,7 @@ def get_cdp(connection, hostname):
     result1 = connection.send_command("show cdp nei", delay_factor=2)
     result2 = connection.send_command("show cdp nei detail", delay_factor=2)
     finalResult = [result1, result2]
-    filename = config.outputPath + hostname + "-CDP-INFO.txt"
+    filename = config.outputPath + hostname + "-cdp-output.txt"
     # Output to file
     with open(filename,'w') as file:
         file.write(finalResult[0])
@@ -132,6 +132,7 @@ def get_adhoc(connection, hostname, command):
     with open(filename,'w') as file:
         file.write(result)
         file.write('\n')
+
 
 def get_configs(connection, hostname):
     # enter enable mode
