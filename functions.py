@@ -71,7 +71,7 @@ def cdp_to_csv(connection, hostname, device_type):
     result += connection.send_command("show cdp neighbor det", delay_factor=2)
     # Step through output line by line
     # open the file in the write mode
-    filename = config.outputPath + hostname + ".csv"
+    filename = config.outputPath + hostname + "-cdp-info.csv"
     with open(filename, 'w') as f:
         # create the csv writer
         writer = csv.writer(f)
