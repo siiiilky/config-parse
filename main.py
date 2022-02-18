@@ -7,10 +7,10 @@ import functions
 #
 # Configuration to be done in config.py
 #
-# Device type (cisco_ios, cisco_nxos)
-deviceType = 'cisco_ios'
 # Connect to the device
-connection = functions.connect('10.100.100.52', deviceType)
+connection = functions.connect('10.100.100.52')
+# Device type (cisco_ios, cisco_nxos)
+deviceType = functions.get_type(connection)
 # Retrieve hostname
 hostname = functions.get_hostname(connection)
 # Create CSV containing CDP information
@@ -19,6 +19,8 @@ functions.cdp_to_csv(connection, hostname, deviceType)
 functions.get_cdp(connection, hostname)
 # Get show run, show run all, and show start
 functions.get_configs(connection, hostname)
+# Get OSPF infor from device
+functions.get_ospf_info(connection, hostname, deviceType)
 # Run and adhoc command
 functions.get_adhoc(connection, hostname, "show ver")
 # close SSH connection
