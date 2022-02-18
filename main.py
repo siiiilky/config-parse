@@ -17,6 +17,8 @@ hostname = functions.get_hostname(connection)
 functions.cdp_to_csv(connection, hostname, deviceType)
 # Create text file containing switch CDP output
 functions.get_cdp(connection, hostname)
+# Get show run, show run all, and show start
+functions.get_configs(connection, hostname)
 # Run and adhoc command
 functions.get_adhoc(connection, hostname, "show ver")
 # close SSH connection

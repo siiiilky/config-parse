@@ -133,3 +133,26 @@ def get_adhoc(connection, hostname, command):
         file.write(result)
         file.write('\n')
 
+def get_configs(connection, hostname):
+    # enter enable mode
+    connection.enable()
+    # execute the show run | inc hostname command
+    # we increase the delay_factor for this command, because it take some time if many devices are seen by CDP
+    result = connection.send_command("show run all", delay_factor=2)
+    filename = config.outputPath + hostname + "-" + "show_run_all" + ".txt"
+    # Output to file
+    with open(filename,'w') as file:
+        file.write(result)
+        file.write('\n')
+    result = connection.send_command("show run", delay_factor=2)
+    filename = config.outputPath + hostname + "-" + "show_run" + ".txt"
+    # Output to file
+    with open(filename, 'w') as file:
+        file.write(result)
+        file.write('\n')
+    result = connection.send_command("show start", delay_factor=2)
+    filename = config.outputPath + hostname + "-" + "show_start" + ".txt"
+    # Output to file
+    with open(filename, 'w') as file:
+        file.write(result)
+        file.write('\n')
