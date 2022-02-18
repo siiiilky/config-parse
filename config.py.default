@@ -1,0 +1,4 @@
+username='admin'
+password='cisco'
+secret='cisco'
+outputPath='/path/to/output'

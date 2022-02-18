@@ -1,0 +1,15 @@
+Requires -:
+
+netmiko
+
+Instructions -:
+
+Import functions - import functions
+
+First create a connection to the device - 'connection = functions.connect('10.100.100.52', 'cisco_ios')'
+
+Retrieve hostname - 'hostname = functions.get_hostname(connection)'
+
+Output CDP to CSV - 'functions.cdp_to_csv(connection, hostname)'
+
+Remember to close SSH connection - 'connection.disconnect()'
