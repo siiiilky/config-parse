@@ -157,3 +157,17 @@ def get_configs(connection, hostname):
     with open(filename, 'w') as file:
         file.write(result)
         file.write('\n')
+
+
+def get_ospf_info(connection, hostname, device_type):
+    # enter enable mode
+    connection.enable()
+    # execute the show run | inc hostname command
+    result1 = connection.send_command("show ip ospf", delay_factor=2)
+    # Output to file
+    result2 = connection.send_command("show ip ospf nei", delay_factor=2)
+    filename = config.outputPath + hostname + "-" + "ospf_output" + ".txt"
+    # Output to file
+    with open(filename, 'w') as file:
+        file.write(result1 + "\n\n" + result2)
+        file.write('\n')
