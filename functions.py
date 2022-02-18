@@ -162,12 +162,34 @@ def get_configs(connection, hostname):
 def get_ospf_info(connection, hostname, device_type):
     # enter enable mode
     connection.enable()
-    # execute the show run | inc hostname command
-    result1 = connection.send_command("show ip ospf", delay_factor=2)
-    # Output to file
-    result2 = connection.send_command("show ip ospf nei", delay_factor=2)
-    filename = config.outputPath + hostname + "-" + "ospf_output" + ".txt"
-    # Output to file
-    with open(filename, 'w') as file:
-        file.write(result1 + "\n\n" + result2)
-        file.write('\n')
+    # Check if OSPF is enabled before running any commands
+    if device_type == "cisco_ios":
+        # Check if router ospf is configured
+        result = connection.send_command("show run | inc router ospf", delay_factor=2)
+        # Parse the output one line at a time
+        for l in result.split("\n"):
+            if "router ospf" in l:
+                # execute the command
+                result1 = connection.send_command("show ip ospf", delay_factor=2)
+                # Output to file
+                result2 = connection.send_command("show ip ospf nei", delay_factor=2)
+                filename = config.outputPath + hostname + "-" + "ospf_output" + ".txt"
+                # Output to file
+                with open(filename, 'w') as file:
+                    file.write(result1 + "\n\n" + result2)
+                    file.write('\n')
+    elif device_type == "cisco_nxos":
+        # Check if router ospf is configured, ignore interface ip router ospf commands
+        result = connection.send_command("show run | inc 'router ospf' | exc 'ip router ospf'", delay_factor=2)
+        # Parse the output one line at a time
+        for l in result.split("\n"):
+            if "router ospf" in l:
+                # execute the command
+                result1 = connection.send_command("show ip ospf vrf all", delay_factor=2)
+                # Output to file
+                result2 = connection.send_command("show ip ospf nei vrf all", delay_factor=2)
+                filename = config.outputPath + hostname + "-" + "ospf_output" + ".txt"
+                # Output to file
+                with open(filename, 'w') as file:
+                    file.write(result1 + "\n\n" + result2)
+                    file.write('\n')
