@@ -193,3 +193,14 @@ def get_ospf_info(connection, hostname, device_type):
                 with open(filename, 'w') as file:
                     file.write(result1 + "\n\n" + result2)
                     file.write('\n')
+
+def configure_interface(connection, interface, command):
+    # enter enable mode
+    connection.enable()
+    # Create a CLI configuration
+    interface_config = [
+        "interface " + interface,
+         command
+    ]
+    result = connection.send_config_set(interface_config)
+    print (result)
