@@ -204,3 +204,10 @@ def configure_interface(connection, interface, command):
     ]
     result = connection.send_config_set(interface_config)
     print (result)
+
+def configure_global(connection, command):
+    # enter enable mode
+    connection.enable()
+    # Create a CLI configuration
+    result = connection.send_config_set(command)
+    print (result)

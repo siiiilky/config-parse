@@ -25,6 +25,8 @@ functions.get_ospf_info(connection, hostname, deviceType)
 functions.get_adhoc(connection, hostname, "show ver")
 # Send an interface config command
 functions.configure_interface(connection, "g1/3", "no cdp enable")
+# Send global config
+functions.configure_global(connection, "no banner exec")
 # close SSH connection
 connection.disconnect()
 
