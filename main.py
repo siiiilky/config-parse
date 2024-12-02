@@ -21,7 +21,7 @@ functions.get_cdp(connection, hostname)
 functions.get_configs(connection, hostname)
 # Get OSPF infor from device
 functions.get_ospf_info(connection, hostname, deviceType)
-# Run and adhoc command
+# Run an adhoc command
 functions.get_adhoc(connection, hostname, "show ver")
 # Send an interface config command
 functions.configure_interface(connection, "g1/3", "no cdp enable")
